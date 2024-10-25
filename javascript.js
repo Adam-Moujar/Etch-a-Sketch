@@ -1,5 +1,5 @@
 /* TODO! 
-1. 16 x 16 square div
+1. 16 x 16 square div XX done
 2. hover effect (no mention of actually clicking or not!)
 3. change grid size to a max of 100, the grid stays the same size, the squares change size;
 extra credit!:
@@ -7,13 +7,13 @@ extra credit!:
 2. progressive darkening effect? by 10% (opacity helps)
 */
 
-// const container_div = document.querySelector(".container")
+const container_div = document.querySelector(".container")
 // let mouse_down = false;
 // document.body.onmousedown = () => (mouse_down = true)
 // document.body.onmouseup = () => (mouse_down = false)
 
-// const DEFAULT_SIZE = 16;
-// const DEFAULT_COLOR = "grey";
+const DEFAULT_SIZE = 16;
+const DEFAULT_COLOR = "grey";
 // const DEFAULT_BUTTON_COLOR = "black";
 // const DEFAULT_MODE = 'color'
 
@@ -23,25 +23,25 @@ extra credit!:
 
 // let current_mode = DEFAULT_MODE;
 
-// function init_grid(size){
-//     for(let i = 0; i < size * size; i++){
-//         const grid_tile = document.createElement("div");
-//         grid_tile.classList.add("grid_tile");
-//         grid_tile.style.backgroundColor = "gray";
-//         // ill move these to a css later
-//         grid_tile.style.height = "28px";
-//         grid_tile.style.width = "28px";
-//         grid_tile.style.border = "1px solid white"
-//         grid_tile.setAttribute("draggable", "false");
-//         grid_tile.style.userSelect = "none";
-//         // up
-//         grid_tile.addEventListener("mouseover", color_tile);
-//         grid_tile.addEventListener("mousedown", color_tile);
-//         grid_tile.addEventListener("mouseleave", color_tile);
+function init_grid(size){
+    for(let i = 0; i < size * size; i++){
+        const grid_tile = document.createElement("div");
+        grid_tile.classList.add("grid_tile");
+        grid_tile.style.backgroundColor = DEFAULT_COLOR;
+        // ill move these to a css later
+        grid_tile.style.height = "28px";
+        grid_tile.style.width = "28px";
+        grid_tile.style.border = "1px solid white"
+        grid_tile.setAttribute("draggable", "false");
+        grid_tile.style.userSelect = "none";
+        // up
+        // grid_tile.addEventListener("mouseover", color_tile);
+        // grid_tile.addEventListener("mousedown", color_tile);
+        // grid_tile.addEventListener("mouseleave", color_tile);
 
-//         container_div.appendChild(grid_tile);
-//     }
-// }
+        container_div.appendChild(grid_tile);
+    }
+}
 
 // function color_tile(e){
 //     if(current_mode === "color"){
@@ -116,7 +116,7 @@ extra credit!:
 //     }
 // }
 
-// window.onload = () => {
-//     init_grid(DEFAULT_SIZE);
-//     init_buttons();
-// }
+window.onload = () => {
+    init_grid(DEFAULT_SIZE);
+    //init_buttons();
+}
