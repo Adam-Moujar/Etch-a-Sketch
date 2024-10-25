@@ -3,7 +3,8 @@
 2. temporary hover effect, on hover:  XX done
     2.1 make color black
     2.2 on hover away, return to default grey color;
-3. permanent (for now) click color in effect
+3. permanent (for now) click color in effect xxx done
+4. eraser button and functionality
 3. change grid size to a max of 100, the grid stays the same size, the squares change size;
 extra credit!:
 1.rainbow behaviour!
@@ -18,13 +19,13 @@ document.body.onmouseup = () => (mouse_down = false)
 const DEFAULT_SIZE = 16;
 const DEFAULT_COLOR = "grey";
 const DEFAULT_BUTTON_COLOR = "black";
-// const DEFAULT_MODE = 'color'
+const DEFAULT_MODE = 'color'
 
-// const eraser_button = document.querySelector("#eraser");
+const eraser_button = document.querySelector("#eraser");
 // const reset_button = document.querySelector("#reset");
 // const rainbow_button = document.querySelector("#rainbow");
 
-// let current_mode = DEFAULT_MODE;
+let current_mode = DEFAULT_MODE;
 
 function init_grid(size){
     for(let i = 0; i < size * size; i++){
@@ -41,6 +42,10 @@ function init_grid(size){
         grid_tile.addEventListener("mouseover", color_tile);
         grid_tile.addEventListener("mousedown", color_tile);
         grid_tile.addEventListener("mouseleave", color_tile);
+
+        grid_tile.addEventListener("mouseover", erase_tile);
+        grid_tile.addEventListener("mousedown", erase_tile);
+        grid_tile.addEventListener("mouseleave", erase_tile);
 
         container_div.appendChild(grid_tile);
     }
@@ -85,35 +90,54 @@ function init_grid(size){
 // }
 
 function color_tile(e){
-    if(e.type === "mousedown" || (e.type === "mouseover" && mouse_down)){
-        e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
-        e.target.removeEventListener("mouseleave", color_tile);
-    }
-    if(e.type === "mouseover"){
-        e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
-    }
-    else if(e.type === "mouseleave"){
-        e.target.style.backgroundColor = DEFAULT_COLOR;
+    if(current_mode === "color"){
+        if(e.type === "mousedown" || (e.type === "mouseover" && mouse_down)){
+            e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
+            e.target.removeEventListener("mouseleave", color_tile);
+            e.target.addEventListener("mouseleave", erase_tile);
+        }
+        if(e.type === "mouseover"){
+            e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
+        }
+        else if(e.type === "mouseleave"){
+            e.target.style.backgroundColor = DEFAULT_COLOR;
+        }
     }
 }
 
-// function init_buttons(){
-//     eraser_button.addEventListener("click", toggle_eraser);
-//     reset_button.addEventListener("click", reset_grid);
-//     rainbow_button.addEventListener("click", toggle_rainbow);
-// }
+function erase_tile(e){
+    if(current_mode === "eraser"){
+        if(e.type === "mousedown" || (e.type === "mouseover" && mouse_down)){
+            e.target.style.backgroundColor = DEFAULT_COLOR;
+            e.target.removeEventListener("mouseleave", erase_tile);
+            e.target.addEventListener("mouseleave", color_tile);
+        }
+        if(e.type === "mouseover"){
+            e.target.setAttribute("old_color", e.target.style.backgroundColor)
+            e.target.style.backgroundColor = DEFAULT_COLOR;
+        }
+        else if(e.type === "mouseleave"){
+            e.target.style.backgroundColor = e.target.getAttribute("old_color");
+        }
+    }
+}
 
-// function toggle_eraser(e){
-//     if(!(current_mode === "color" || current_mode === "eraser")) return;
-//     if(!(current_mode === "eraser")){
-//         current_mode = "eraser";
-//         e.target.style.backgroundColor = "grey";
-//     }
-//     else{
-//         current_mode = DEFAULT_MODE;
-//         e.target.style.backgroundColor = "white";
-//     }
-// }
+function init_buttons(){
+    eraser_button.addEventListener("click", toggle_eraser);
+    // reset_button.addEventListener("click", reset_grid);
+    // rainbow_button.addEventListener("click", toggle_rainbow);
+}
+
+function toggle_eraser(e){
+    if(current_mode === "color"){
+        current_mode = "eraser";
+        e.target.style.backgroundColor = "grey";
+    }
+    else{
+        current_mode = "color";
+        e.target.style.backgroundColor = "white";
+    }
+}
 
 // function reset_grid(e){
 //     container_div.replaceChildren();
@@ -134,5 +158,5 @@ function color_tile(e){
 
 window.onload = () => {
     init_grid(DEFAULT_SIZE);
-    //init_buttons();
+    init_buttons();
 }
