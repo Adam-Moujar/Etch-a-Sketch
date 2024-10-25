@@ -1,6 +1,6 @@
 /* TODO! 
 1. 16 x 16 square div XX done
-2. hover effect (no mention of actually clicking or not!)
+2. hover effect (no mention of actually clicking or not!) XX done
 3. change grid size to a max of 100, the grid stays the same size, the squares change size;
 extra credit!:
 1.rainbow behaviour!
@@ -14,7 +14,7 @@ const container_div = document.querySelector(".container")
 
 const DEFAULT_SIZE = 16;
 const DEFAULT_COLOR = "grey";
-// const DEFAULT_BUTTON_COLOR = "black";
+const DEFAULT_BUTTON_COLOR = "black";
 // const DEFAULT_MODE = 'color'
 
 // const eraser_button = document.querySelector("#eraser");
@@ -35,7 +35,7 @@ function init_grid(size){
         grid_tile.setAttribute("draggable", "false");
         grid_tile.style.userSelect = "none";
         // up
-        // grid_tile.addEventListener("mouseover", color_tile);
+        grid_tile.addEventListener("mouseover", color_tile);
         // grid_tile.addEventListener("mousedown", color_tile);
         // grid_tile.addEventListener("mouseleave", color_tile);
 
@@ -80,6 +80,10 @@ function init_grid(size){
 //         }
 //     }
 // }
+
+function color_tile(e){
+    e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
+}
 
 // function init_buttons(){
 //     eraser_button.addEventListener("click", toggle_eraser);
