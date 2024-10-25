@@ -77,6 +77,7 @@ function init_buttons(){
 }
 
 function toggle_eraser(e){
+    if(!(current_mode === "color" || current_mode === "eraser")) return;
     if(!(current_mode === "eraser")){
         current_mode = "eraser";
         e.target.style.backgroundColor = "grey";
@@ -93,6 +94,7 @@ function reset_grid(e){
 }
 
 function toggle_rainbow(e){
+    if(!(current_mode === "color" || current_mode === "rainbow")) return;
     if(!(current_mode === "rainbow")){
         current_mode = "rainbow";
         e.target.style.backgroundColor = "grey";
