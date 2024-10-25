@@ -10,6 +10,7 @@ const DEFAULT_MODE = 'color'
 
 const eraser_button = document.querySelector("#eraser");
 const reset_button = document.querySelector("#reset");
+const rainbow_button = document.querySelector("#rainbow");
 
 let current_mode = DEFAULT_MODE;
 
@@ -52,11 +53,27 @@ function color_tile(e){
             e.target.addEventListener("mouseleave", color_tile);
         }
     }
+    else if(current_mode === "rainbow"){
+        const randomR = Math.floor(Math.random() * 256)
+        const randomG = Math.floor(Math.random() * 256)
+        const randomB = Math.floor(Math.random() * 256)
+        if(e.type === "mousedown" || e.type === "mouseover" && mouse_down) {
+            e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+            e.target.removeEventListener("mouseleave", color_tile);
+        }
+        else if(e.type === "mouseover"){
+            e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+        }
+        else{
+            e.target.style.backgroundColor = DEFAULT_COLOR;
+        }
+    }
 }
 
 function init_buttons(){
     eraser_button.addEventListener("click", toggle_eraser);
     reset_button.addEventListener("click", reset_grid);
+    rainbow_button.addEventListener("click", toggle_rainbow);
 }
 
 function toggle_eraser(e){
@@ -73,6 +90,17 @@ function toggle_eraser(e){
 function reset_grid(e){
     container_div.replaceChildren();
     init_grid(DEFAULT_SIZE);
+}
+
+function toggle_rainbow(e){
+    if(!(current_mode === "rainbow")){
+        current_mode = "rainbow";
+        e.target.style.backgroundColor = "grey";
+    }
+    else{
+        current_mode = DEFAULT_MODE;
+        e.target.style.backgroundColor = "white";
+    }
 }
 
 window.onload = () => {
