@@ -4,7 +4,8 @@
     2.1 make color black
     2.2 on hover away, return to default grey color;
 3. permanent (for now) click color in effect xxx done
-4. eraser button and functionality
+4. eraser button and functionality XX done (most painful so far)
+5. reset functionality 
 3. change grid size to a max of 100, the grid stays the same size, the squares change size;
 extra credit!:
 1.rainbow behaviour!
@@ -22,7 +23,7 @@ const DEFAULT_BUTTON_COLOR = "black";
 const DEFAULT_MODE = 'color'
 
 const eraser_button = document.querySelector("#eraser");
-// const reset_button = document.querySelector("#reset");
+const reset_button = document.querySelector("#reset");
 // const rainbow_button = document.querySelector("#rainbow");
 
 let current_mode = DEFAULT_MODE;
@@ -124,7 +125,7 @@ function erase_tile(e){
 
 function init_buttons(){
     eraser_button.addEventListener("click", toggle_eraser);
-    // reset_button.addEventListener("click", reset_grid);
+    reset_button.addEventListener("click", reset_grid);
     // rainbow_button.addEventListener("click", toggle_rainbow);
 }
 
@@ -139,10 +140,10 @@ function toggle_eraser(e){
     }
 }
 
-// function reset_grid(e){
-//     container_div.replaceChildren();
-//     init_grid(DEFAULT_SIZE);
-// }
+function reset_grid(e){
+    container_div.replaceChildren();
+    init_grid(DEFAULT_SIZE);
+}
 
 // function toggle_rainbow(e){
 //     if(!(current_mode === "color" || current_mode === "rainbow")) return;
