@@ -1,6 +1,9 @@
 /* TODO! 
 1. 16 x 16 square div XX done
-2. hover effect (no mention of actually clicking or not!) XX done
+2. temporary hover effect, on hover:  XX done
+    2.1 make color black
+    2.2 on hover away, return to default grey color;
+3. permanent (for now) click color in effect
 3. change grid size to a max of 100, the grid stays the same size, the squares change size;
 extra credit!:
 1.rainbow behaviour!
@@ -37,7 +40,7 @@ function init_grid(size){
         // up
         grid_tile.addEventListener("mouseover", color_tile);
         // grid_tile.addEventListener("mousedown", color_tile);
-        // grid_tile.addEventListener("mouseleave", color_tile);
+        grid_tile.addEventListener("mouseleave", color_tile);
 
         container_div.appendChild(grid_tile);
     }
@@ -82,7 +85,12 @@ function init_grid(size){
 // }
 
 function color_tile(e){
-    e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
+    if(e.type === "mouseover"){
+        e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
+    }
+    else if(e.type === "mouseleave"){
+        e.target.style.backgroundColor = DEFAULT_COLOR;
+    }
 }
 
 // function init_buttons(){
