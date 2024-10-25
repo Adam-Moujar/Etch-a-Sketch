@@ -11,9 +11,9 @@ extra credit!:
 */
 
 const container_div = document.querySelector(".container")
-// let mouse_down = false;
-// document.body.onmousedown = () => (mouse_down = true)
-// document.body.onmouseup = () => (mouse_down = false)
+let mouse_down = false;
+document.body.onmousedown = () => (mouse_down = true)
+document.body.onmouseup = () => (mouse_down = false)
 
 const DEFAULT_SIZE = 16;
 const DEFAULT_COLOR = "grey";
@@ -39,7 +39,7 @@ function init_grid(size){
         grid_tile.style.userSelect = "none";
         // up
         grid_tile.addEventListener("mouseover", color_tile);
-        // grid_tile.addEventListener("mousedown", color_tile);
+        grid_tile.addEventListener("mousedown", color_tile);
         grid_tile.addEventListener("mouseleave", color_tile);
 
         container_div.appendChild(grid_tile);
@@ -85,6 +85,10 @@ function init_grid(size){
 // }
 
 function color_tile(e){
+    if(e.type === "mousedown" || (e.type === "mouseover" && mouse_down)){
+        e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
+        e.target.removeEventListener("mouseleave", color_tile);
+    }
     if(e.type === "mouseover"){
         e.target.style.backgroundColor = DEFAULT_BUTTON_COLOR;
     }
