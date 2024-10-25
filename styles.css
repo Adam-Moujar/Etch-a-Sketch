@@ -1,6 +1,21 @@
 .container{
     display:flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     height:480px;
     width: 480px;
+}
+
+body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.buttons{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
 }
