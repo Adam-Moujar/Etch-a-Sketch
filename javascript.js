@@ -23,10 +23,11 @@ const DEFAULT_COLOR = "grey";
 const DEFAULT_BUTTON_COLOR = "black";
 const DEFAULT_MODE = 'color'
 
+const color_button = document.querySelector("#color");
 const eraser_button = document.querySelector("#eraser");
 const reset_button = document.querySelector("#reset");
 const rainbow_button = document.querySelector("#rainbow");
-const color_wheel = document.querySelector("#color")
+const color_wheel = document.querySelector("#color_wheel")
 
 let current_mode = DEFAULT_MODE;
 let current_color = DEFAULT_BUTTON_COLOR;
@@ -47,14 +48,6 @@ function init_grid(size){
         grid_tile.addEventListener("mousedown", color_tile);
         grid_tile.addEventListener("mouseleave", color_tile);
 
-        // grid_tile.addEventListener("mouseover", erase_tile);
-        // grid_tile.addEventListener("mousedown", erase_tile);
-        // grid_tile.addEventListener("mouseleave", erase_tile);
-
-        // grid_tile.addEventListener("mouseover", rainbow_tile);
-        // grid_tile.addEventListener("mousedown", rainbow_tile);
-        // grid_tile.addEventListener("mouseleave", rainbow_tile);
-
         color_wheel.addEventListener("input", pick_color, false);
 
         container_div.appendChild(grid_tile);
@@ -64,25 +57,8 @@ function init_grid(size){
 function pick_color(e){
     current_color = e.target.value;
 }
+
 function color_tile(e){
-    // if(e.type === "mousedown" || (e.type === "mouseover" && mouse_down)){
-    //     e.target.style.backgroundColor = e.target.getAttribute("new_color");
-    //     //e.target.removeEventListener("mouseleave", color_tile);
-    //     e.target.addEventListener("mouseleave", erase_tile);
-    //     e.target.addEventListener("mouseleave", rainbow_tile);
-    //     e.target.setAttribute("colored", true)
-    // }
-    // if(e.type === "mouseover"){
-    //     //let current_color = DEFAULT_BUTTON_COLOR;
-    //     e.target.setAttribute("old_color", e.target.style.backgroundColor)
-    //     e.target.setAttribute("new_color", current_color)
-    //     e.target.style.backgroundColor = e.target.getAttribute("new_color");
-    // }
-    // else if(e.type === "mouseleave"){
-    //     if(e.target.getAttribute("colored"))
-    //         console.log("Hi");
-    //     e.target.style.backgroundColor = e.target.getAttribute("old_color");
-    // }
     if(e.type === "mouseover"){
         if(current_mode === "rainbow"){
             const randomR = Math.floor(Math.random() * 256);
@@ -107,79 +83,64 @@ function color_tile(e){
     }
 }
 
-// function erase_tile(e){
-//     if(current_mode === "eraser"){
-//         if(e.type === "mousedown" || (e.type === "mouseover" && mouse_down)){
-//             e.target.style.backgroundColor = DEFAULT_COLOR;
-//             //e.target.removeEventListener("mouseleave", erase_tile);
-//             e.target.addEventListener("mouseleave", color_tile);
-//             e.target.addEventListener("mouseleave", rainbow_tile);
-//             e.target.setAttribute("colored", true)
-//         }
-//         if(e.type === "mouseover"){
-//             e.target.setAttribute("old_color", e.target.style.backgroundColor)
-//             e.target.style.backgroundColor = DEFAULT_COLOR;
-//         }
-//         else if(e.type === "mouseleave"){
-//             if(!e.target.getAttribute("colored"))
-//                 e.target.style.backgroundColor = e.target.getAttribute("old_color");
-//         }
-//     }
-// }
-
-// function rainbow_tile(e){
-//     if(current_mode === "rainbow"){
-//         if(e.type === "mousedown" || (e.type === "mouseover" && mouse_down)){
-//             e.target.style.backgroundColor = e.target.getAttribute("new_color");
-//             e.target.removeEventListener("mouseleave", rainbow_tile);
-//             e.target.addEventListener("mouseleave", color_tile);
-//             e.target.addEventListener("mouseleave", erase_tile);
-//         }
-//         if(e.type === "mouseover"){
-//             const randomR = Math.floor(Math.random() * 256);
-//             const randomG = Math.floor(Math.random() * 256);
-//             const randomB = Math.floor(Math.random() * 256);
-//             let current_color = `rgb(${randomR}, ${randomG}, ${randomB})`;
-//             e.target.setAttribute("old_color", e.target.style.backgroundColor)
-//             e.target.setAttribute("new_color", current_color)
-//             e.target.style.backgroundColor = e.target.getAttribute("new_color");
-//         }
-//         else if(e.type === "mouseleave"){
-//             e.target.style.backgroundColor = e.target.getAttribute("old_color");
-//         }
-//     }
-// }
-
 function init_buttons(){
-    eraser_button.addEventListener("click", toggle_eraser);
+    // eraser_button.addEventListener("click", toggle_eraser);
+    // rainbow_button.addEventListener("click", toggle_rainbow);
+    // reset_button.addEventListener("click", reset_grid);
+
+    color_button.onclick = () => toggle_button('color');
+    eraser_button.onclick = () => toggle_button('eraser');
+    rainbow_button.onclick = () => toggle_button('rainbow');
     reset_button.addEventListener("click", reset_grid);
-    rainbow_button.addEventListener("click", toggle_rainbow);
 }
 
-function toggle_eraser(e){
+// function toggle_eraser(e){
+//     if(current_mode === "color"){
+//         current_mode = "eraser";
+//         e.target.style.backgroundColor = "grey";
+//     }
+//     else{
+//         current_mode = "color";
+//         current_color = color_wheel.value;
+//         e.target.style.backgroundColor = "white";
+//     }
+// }
+
+// function toggle_rainbow(e){
+//     if(current_mode === "color"){
+//         current_mode = "rainbow";
+//         e.target.style.backgroundColor = "grey";
+//     }
+//     else{
+//         current_mode = "color";
+//         current_color = color_wheel.value;
+//         e.target.style.backgroundColor = "white";
+//     }
+// }
+
+function toggle_button(new_mode){
     if(current_mode === "color"){
-        current_mode = "eraser";
-        e.target.style.backgroundColor = "grey";
+        color_button.style.backgroundColor = "white";
     }
-    else{
-        current_mode = "color";
+    else if(current_mode === "eraser"){
+        eraser_button.style.backgroundColor = "white";
+    }
+    else if(current_mode === "rainbow"){
+        rainbow_button.style.backgroundColor = "white";
+    }
+    
+    current_mode = new_mode;
+    if(new_mode === "color"){
         current_color = color_wheel.value;
-        e.target.style.backgroundColor = "white";
+        color_button.style.backgroundColor = "grey";
+    }
+    else if(new_mode === "eraser"){
+        eraser_button.style.backgroundColor = "grey";
+    }
+    else if(new_mode === "rainbow"){
+        rainbow_button.style.backgroundColor = "grey";
     }
 }
-
-function toggle_rainbow(e){
-    if(current_mode === "color"){
-        current_mode = "rainbow";
-        e.target.style.backgroundColor = "grey";
-    }
-    else{
-        current_mode = "color";
-        current_color = color_wheel.value;
-        e.target.style.backgroundColor = "white";
-    }
-}
-
 function reset_grid(e){
     container_div.replaceChildren();
     init_grid(DEFAULT_SIZE);
