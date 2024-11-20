@@ -39,7 +39,7 @@ let current_size = DEFAULT_SIZE;
 function init_grid(size){
     let grid_tile_size = (GRID_SIZE / size) - 2;
     for(let i = 0; i < size * size; i++){
-        size_text.innerHTML = current_size;
+        size_text.innerHTML = current_size + " X " + current_size;
         const grid_tile = document.createElement("div");
         grid_tile.classList.add("grid_tile");
         grid_tile.style.backgroundColor = DEFAULT_COLOR;
