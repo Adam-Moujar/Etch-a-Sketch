@@ -98,7 +98,7 @@ function init_buttons(){
     rainbow_button.onclick = () => toggle_button('rainbow');
     reset_button.addEventListener("click", reset_grid);
     color_wheel.addEventListener("input", pick_color, false);
-    slider.addEventListener("input", change_size, false);
+    size_slider.onmouseup = (e) => change_size(e);
 }
 
 function toggle_button(new_mode){

@@ -7,7 +7,14 @@
     width: 480px;
 }
 
-body{
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+.content{
     display:flex;
     justify-content: center;
     align-items: center;
