@@ -37,7 +37,8 @@ let current_color = DEFAULT_BUTTON_COLOR;
 let current_size = DEFAULT_SIZE;
 
 function init_grid(size){
-    let grid_tile_size = (GRID_SIZE / size) - 2;
+    // let grid_tile_size = (GRID_SIZE / size) - 2;
+    let grid_tile_size = (GRID_SIZE / size);
     for(let i = 0; i < size * size; i++){
         size_text.innerHTML = current_size + " X " + current_size;
         const grid_tile = document.createElement("div");
@@ -46,7 +47,7 @@ function init_grid(size){
 
         grid_tile.style.height = grid_tile_size + "px";
         grid_tile.style.width = grid_tile_size + "px";
-        grid_tile.style.border = "1px solid white"
+        // grid_tile.style.border = "1px solid white"
         grid_tile.setAttribute("draggable", "false");
         grid_tile.style.userSelect = "none";
 
