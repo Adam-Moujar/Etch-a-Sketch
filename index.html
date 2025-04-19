@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Etch a Sketch</title>
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    <div class = "header">
-        Etch A Sketch
-    </div>
-    <div class = "content">
-        <div class = "buttons">
-            <input id ="color_wheel" type="color" value = "#000000">
-            <button id="color">Color</button>
-            <button id="eraser">Eraser</button>
-            <button id="reset">Reset</button>
-            <button id="rainbow">Rainbow</button>
-            <input id="slider" type = "range" min="10" max="50" value="16">
-            <p id="size"></p>
+    <header>
+        <h1>Etch-a-Sketch</h1>
+    </header>
+
+    <main>
+        <div class="content">
+            <div class="buttons">
+                <input id="colorSelector" type="color" value="#111">
+                <button id="eraser">Eraser</button>
+                <button id="reset">Reset</button>
+                <button id="rainbow">Rainbow</button>
+                <input id="slider" type="range" min="10" max="40">
+                <p id="size"></p>
+            </div>
+            <div id="grid" class="grid"></div>
         </div>
-        <div class = "container">
-        </div>
-    </div>
-    <div class = "footer">
+    </main>
+
+    <footer>
         Adam Moujar Bakhti Copyright © 2024 - The Odin Project Curriculum
-    </div>
-    <script src="javascript.js"></script>
+    </footer>
+
 </body>
+
 </html>
